@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.agilegroupfrontend.BLL.PedalBLL;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,32 +26,17 @@ public class PedalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedal);
+        PedalActivity.this.setTitle("Pedal");
         PedalrecyclerView = findViewById(R.id.PedalrecyclerView);
-        AuctionSystemAPI auctionSystemAPI = Url.getInstance().create(AuctionSystemAPI.class);
 
-        Call<List<Bids>> listCall = auctionSystemAPI.getPedalBids(Url.Token);
+        PedalBLL pedalBLL = new PedalBLL();
+        if (pedalBLL.getPedalBid()){
+            BidsAdapter bidsAdapter = new BidsAdapter(PedalActivity.this,Url.bidsList);
+            PedalrecyclerView.setAdapter(bidsAdapter);
+            PedalrecyclerView.setLayoutManager(new LinearLayoutManager(PedalActivity.this));
+        }else{
+            Toast.makeText(PedalActivity.this, "Failed", Toast.LENGTH_LONG).show();
 
-        listCall.enqueue(new Callback<List<Bids>>() {
-            @Override
-            public void onResponse(Call<List<Bids>> call, Response<List<Bids>> response) {
-                if (response.isSuccessful()){
-                    Toast.makeText(PedalActivity.this, "Error : "+response.code(), Toast.LENGTH_LONG).show();
-
-                    bidsList = response.body();
-
-                    Toast.makeText(PedalActivity.this, String.valueOf(bidsList.size()), Toast.LENGTH_LONG).show();
-
-                    BidsAdapter bidsAdapter = new BidsAdapter(PedalActivity.this,bidsList);
-                    PedalrecyclerView.setAdapter(bidsAdapter);
-                    PedalrecyclerView.setLayoutManager(new LinearLayoutManager(PedalActivity.this));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Bids>> call, Throwable t) {
-                Toast.makeText(PedalActivity.this, "Error : "+t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        });
+        }
     }
 }

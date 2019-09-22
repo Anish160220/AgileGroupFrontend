@@ -12,34 +12,44 @@
         android:layout_margin="20dp"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/tvClosedBidsBidsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="43dp"
         android:layout_toRightOf="@+id/closedBidsImgPhoto"
+        android:text="Name"
         android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_marginTop="50dp"
-        android:text="Name"/>
+        android:textStyle="bold" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/tvClosedBidsBidsPrice"
-        android:layout_toRightOf="@+id/closedBidsImgPhoto"
-        android:layout_below="@+id/tvClosedBidsBidsTitle"
-        android:textSize="20sp"
-        android:layout_marginTop="50dp"
-        android:text="Item Price"/>
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvClosedBidsMarketValue"
+        android:layout_below="@+id/tvClosedBidsBidsTitle"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="47dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="24dp"
         android:layout_toRightOf="@+id/closedBidsImgPhoto"
+        android:text="Item Price"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvClosedBidsMarketValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/tvClosedBidsBidsPrice"
-        android:textSize="20sp"
-        android:layout_marginTop="50dp"
-        android:text="Item Description"/>
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="8dp"
+        android:layout_toRightOf="@+id/closedBidsImgPhoto"
+        android:text="Item Description"
+        android:textSize="20sp" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

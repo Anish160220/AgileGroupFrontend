@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.agilegroupfrontend.BLL.GetAllOngoingBidsBLL;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,34 +26,21 @@ public class BidsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bids);
+
+        BidsActivity.this.setTitle("Ongoing Bids");
         recyclerView = findViewById(R.id.recyclerView);
 
         AuctionSystemAPI auctionSystemAPI = Url.getInstance().create(AuctionSystemAPI.class);
 
         Call<List<Bids>> listCall = auctionSystemAPI.getAllBids(Url.Token);
 
-        listCall.enqueue(new Callback<List<Bids>>() {
-            @Override
-            public void onResponse(Call<List<Bids>> call, Response<List<Bids>> response) {
-                if (response.isSuccessful()){
-                    Toast.makeText(BidsActivity.this, "Error : "+response.code(), Toast.LENGTH_LONG).show();
+        GetAllOngoingBidsBLL getAllOngoingBidsBLL = new GetAllOngoingBidsBLL();
+        if (getAllOngoingBidsBLL.getAllOngoing()){
+            BidsAdapter bidsAdapter = new BidsAdapter(BidsActivity.this,Url.bidsList);
+            recyclerView.setAdapter(bidsAdapter);
+            recyclerView.setLayoutManager(new LinearLayoutManager(BidsActivity.this));
+        }
 
-                    bidsList = response.body();
-
-                    Toast.makeText(BidsActivity.this, String.valueOf(bidsList.size()), Toast.LENGTH_LONG).show();
-
-                    BidsAdapter bidsAdapter = new BidsAdapter(BidsActivity.this,bidsList);
-                    recyclerView.setAdapter(bidsAdapter);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(BidsActivity.this));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Bids>> call, Throwable t) {
-                Toast.makeText(BidsActivity.this, "Error : "+t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        });
 
     }
 }

@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.agilegroupfrontend.BLL.GuitarBLL;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,32 +26,16 @@ public class GuitarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guitar);
+        GuitarActivity.this.setTitle("Guitar");
         GuitarrecyclerView = findViewById(R.id.GuitarrecyclerView);
-        AuctionSystemAPI auctionSystemAPI = Url.getInstance().create(AuctionSystemAPI.class);
 
-        Call<List<Bids>> listCall = auctionSystemAPI.getGuitarBids(Url.Token);
-
-        listCall.enqueue(new Callback<List<Bids>>() {
-            @Override
-            public void onResponse(Call<List<Bids>> call, Response<List<Bids>> response) {
-                if (response.isSuccessful()){
-                    Toast.makeText(GuitarActivity.this, "Error : "+response.code(), Toast.LENGTH_LONG).show();
-
-                    bidsList = response.body();
-
-                    Toast.makeText(GuitarActivity.this, String.valueOf(bidsList.size()), Toast.LENGTH_LONG).show();
-
-                    BidsAdapter bidsAdapter = new BidsAdapter(GuitarActivity.this,bidsList);
-                    GuitarrecyclerView.setAdapter(bidsAdapter);
-                    GuitarrecyclerView.setLayoutManager(new LinearLayoutManager(GuitarActivity.this));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Bids>> call, Throwable t) {
-                Toast.makeText(GuitarActivity.this, "Error : "+t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        });
+        GuitarBLL guitarBLL = new GuitarBLL();
+        if (guitarBLL.getGuitarBid()){
+            BidsAdapter bidsAdapter = new BidsAdapter(GuitarActivity.this,Url.bidsList);
+            GuitarrecyclerView.setAdapter(bidsAdapter);
+            GuitarrecyclerView.setLayoutManager(new LinearLayoutManager(GuitarActivity.this));
+        }else{
+            Toast.makeText(GuitarActivity.this, "Failed", Toast.LENGTH_LONG).show();
+        }
     }
 }

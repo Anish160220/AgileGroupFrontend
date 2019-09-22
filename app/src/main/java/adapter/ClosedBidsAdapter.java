@@ -55,8 +55,8 @@ public class ClosedBidsAdapter extends RecyclerView.Adapter<ClosedBidsAdapter.Cl
         }
 
         closedBidsViewHolder.tvClosedBidsBidsTitle.setText(bids.getBidTitle());
-        closedBidsViewHolder.tvClosedBidsBidsPrice.setText(String.valueOf(bids.getStartingPrice()));
-        closedBidsViewHolder.tvClosedBidsMarketValue.setText(String.valueOf(bids.getMarketValue()));
+        closedBidsViewHolder.tvClosedBidsBidsPrice.setText("Rs."+String.valueOf(bids.getStartingPrice())+"/-");
+        closedBidsViewHolder.tvClosedBidsMarketValue.setText("Rs."+String.valueOf(bids.getMarketValue())+"/-");
 
         closedBidsViewHolder.closedBidsImgPhoto.setOnClickListener(new View.OnClickListener() {
             @Override

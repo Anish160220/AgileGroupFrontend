@@ -4,65 +4,78 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:drawable/dialog_holo_light_frame">
+
     <ImageView
+        android:id="@+id/yourAuctionSoldOutBidsImgPhoto"
         android:layout_width="140dp"
         android:layout_height="200dp"
-        android:id="@+id/yourAuctionSoldOutBidsImgPhoto"
-        android:src="@drawable/ic_launcher_background"
-        android:layout_margin="20dp"/>
+        android:src="@drawable/ic_launcher_background" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/tvCYourAuctionSoldOutBidsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="23dp"
+        android:layout_toEndOf="@+id/yourAuctionSoldOutBidsImgPhoto"
         android:layout_toRightOf="@+id/yourAuctionSoldOutBidsImgPhoto"
+        android:text="Name"
         android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_marginTop="50dp"
-        android:text="Name"/>
+        android:textStyle="bold" />
 
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/tvYourAuctionSoldOutBidPrice"
-        android:layout_toRightOf="@+id/yourAuctionSoldOutBidsImgPhoto"
-        android:layout_below="@+id/tvCYourAuctionSoldOutBidsTitle"
-        android:textSize="16sp"
-
-        android:textStyle="bold"
-        android:layout_marginTop="50dp"
-        android:text="Item Price(NRS) : "/>
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCYourAuctionSoldOutBidsTitle"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="17dp"
+
+        android:layout_toRightOf="@+id/yourAuctionSoldOutBidsImgPhoto"
+        android:text="Item Price :"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
         android:id="@+id/tvYourAuctionSoldOutBidsPrice"
-        android:layout_toRightOf="@+id/tvYourAuctionSoldOutBidPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/tvCYourAuctionSoldOutBidsTitle"
+        android:layout_marginLeft="34dp"
+        android:layout_marginTop="17dp"
+        android:layout_toRightOf="@+id/tvYourAuctionSoldOutBidPrice"
+        android:text="Price"
         android:textSize="16sp"
-        android:layout_marginTop="50dp"
-        android:text="Price"/>
+        android:textStyle="bold"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/tvYourAuctionSoldOutMarkeValue"
-        android:layout_toRightOf="@+id/yourAuctionSoldOutBidsImgPhoto"
-        android:layout_below="@+id/tvYourAuctionSoldOutBidsPrice"
-
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:layout_marginTop="50dp"
-        android:text="Market PriceO(NRS) : "/>
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tvYourAuctionSoldOutMarketValue"
-        android:layout_toRightOf="@+id/tvYourAuctionSoldOutMarkeValue"
         android:layout_below="@+id/tvYourAuctionSoldOutBidsPrice"
+        android:layout_marginLeft="20dp"
+
+        android:layout_marginTop="9dp"
+        android:layout_toRightOf="@+id/yourAuctionSoldOutBidsImgPhoto"
+        android:text="Market Price : "
         android:textSize="16sp"
-        android:layout_marginTop="50dp"
-        android:text="Value"/>
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvYourAuctionSoldOutMarketValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvYourAuctionSoldOutBidsPrice"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="8dp"
+        android:layout_toRightOf="@+id/tvYourAuctionSoldOutMarkeValue"
+        android:text="Value"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

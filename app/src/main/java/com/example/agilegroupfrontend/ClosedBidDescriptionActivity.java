@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.agilegroupfrontend.BLL.UpdateClosedBidBLL;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -92,35 +94,18 @@ public class ClosedBidDescriptionActivity extends AppCompatActivity implements D
 
         Date date = new Date(endingDate);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Url.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        UpdateClosedBidBLL updateClosedBidBLL  = new UpdateClosedBidBLL(Bid_id, date);
+
+        if (updateClosedBidBLL.checkUpdateClosedBid()){
+            Toast.makeText(ClosedBidDescriptionActivity.this, "Successfully updated your bid",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(ClosedBidDescriptionActivity.this,ClosedBidsActivity.class);
+            startActivity(intent);
+        }else{
+            Toast.makeText(ClosedBidDescriptionActivity.this,"Failed",Toast.LENGTH_LONG).show();
+
+        }
 
 
-        AuctionSystemAPI auctionSystemAPI = retrofit.create(AuctionSystemAPI.class);
-
-        Call<Void> bidsCall = auctionSystemAPI.updateEndingDate(Url.Token,Bid_id,date);
-
-        bidsCall.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (!response.isSuccessful()){
-
-                    Toast.makeText(ClosedBidDescriptionActivity.this,"Code" + response.code(),Toast.LENGTH_LONG).show();
-                    return;
-                }
-                Toast.makeText(ClosedBidDescriptionActivity.this, "Successfully Added your bid",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(ClosedBidDescriptionActivity.this,ClosedBidsActivity.class);
-                startActivity(intent);
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(ClosedBidDescriptionActivity.this,"Error " + t.getLocalizedMessage(),Toast.LENGTH_LONG).show();
-
-            }
-        });
     }
 
     private void loadDatePicker() {

@@ -19,6 +19,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.agilegroupfrontend.BLL.SearchBLL;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,6 +62,7 @@ public class UserDashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_dashboard);
+        UserDashboardActivity.this.setTitle("Dashboard");
         SearchrecyclerView = findViewById(R.id.SearchrecyclerView);
         etSearch = findViewById(R.id.etSearch);
         cvAddBid = findViewById(R.id.cvAddBid);
@@ -97,7 +100,7 @@ public class UserDashboardActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-
+                bidsList=null;
             }
         });
 
@@ -112,31 +115,17 @@ public class UserDashboardActivity extends AppCompatActivity {
             }
 
             private void performSearch() {
-                AuctionSystemAPI auctionSystemAPI = Url.getInstance().create(AuctionSystemAPI.class);
+                SearchBLL searchBLL = new SearchBLL(etSearch.getText().toString());
 
-                Call<List<Bids>> listCall = auctionSystemAPI.search(Url.Token,etSearch.getText().toString());
-                listCall.enqueue(new Callback<List<Bids>>() {
-                    @Override
-                    public void onResponse(Call<List<Bids>> call, Response<List<Bids>> response) {
-                        Toast.makeText(UserDashboardActivity.this, "Error : "+response.code(), Toast.LENGTH_LONG).show();
+                if (searchBLL.checkSearch()){
+                    BidsAdapter bidsAdapter = new BidsAdapter(UserDashboardActivity.this,Url.bidsList);
+                    SearchrecyclerView.setAdapter(bidsAdapter);
+                    SearchrecyclerView.setLayoutManager(new LinearLayoutManager(UserDashboardActivity.this));
+                }else{
+                    Toast.makeText(UserDashboardActivity.this, "Failed", Toast.LENGTH_LONG).show();
 
-                        bidsList = response.body();
+                }
 
-                        Toast.makeText(UserDashboardActivity.this, String.valueOf(bidsList.size()), Toast.LENGTH_LONG).show();
-
-                        BidsAdapter bidsAdapter = new BidsAdapter(UserDashboardActivity.this,bidsList);
-                        SearchrecyclerView.setAdapter(bidsAdapter);
-                        SearchrecyclerView.setLayoutManager(new LinearLayoutManager(UserDashboardActivity.this));
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Bids>> call, Throwable t) {
-                        Toast.makeText(UserDashboardActivity.this, "Error : "+t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-
-
-                    }
-                });
             }
         });
         cvAddBid.setOnClickListener(new View.OnClickListener() {

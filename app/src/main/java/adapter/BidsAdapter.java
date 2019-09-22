@@ -55,8 +55,8 @@ public class BidsAdapter extends RecyclerView.Adapter<BidsAdapter.BidsViewHolder
         }
 
         bidsViewHolder.tvBidsTitle.setText(bids.getBidTitle());
-      bidsViewHolder.tvBidsPrice.setText(String.valueOf(bids.getBidAmount()));
-        bidsViewHolder.tvMArketValue.setText(String.valueOf(bids.getMarketValue()));
+      bidsViewHolder.tvBidsPrice.setText("Rs." + String.valueOf(bids.getBidAmount())+"/-");
+        bidsViewHolder.tvMArketValue.setText("Rs." + String.valueOf(bids.getMarketValue())+"/-");
 
         bidsViewHolder.imgPhoto.setOnClickListener(new View.OnClickListener() {
             @Override

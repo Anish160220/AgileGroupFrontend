@@ -12,6 +12,7 @@ public class YourAuctionDashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_auction_dashboard);
+        YourAuctionDashboardActivity.this.setTitle("Your Dashboard");
         cvYourAuctionSoldOut = findViewById(R.id.cvYourAuctionSoldOut);
         cvYourAuctionWinner = findViewById(R.id.cvYourAuctionWinner);
         cvYourAuctionSoldOut.setOnClickListener(new View.OnClickListener() {

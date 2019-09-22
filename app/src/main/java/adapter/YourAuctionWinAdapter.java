@@ -54,7 +54,7 @@ public class YourAuctionWinAdapter extends RecyclerView.Adapter<YourAuctionWinAd
         }
 
         yourAuctionWinViewHolder.tvCYourAuctionWinBidsTitle.setText(bids.getBidTitle());
-         yourAuctionWinViewHolder.tvYourAuctionWinMarketValue.setText(String.valueOf(bids.getBidAmount()));
+         yourAuctionWinViewHolder.tvYourAuctionWinMarketValue.setText("Rs."+String.valueOf(bids.getBidAmount())+"/-");
 
     }
 

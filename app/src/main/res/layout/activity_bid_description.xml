@@ -29,17 +29,18 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
 
-                android:hint="Bid Title"
+                android:hint="Product Name"
                 android:textSize="20sp"/>
+
             <TextView
+                android:id="@+id/tvDesBidTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvDesBidTitle"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="35dp"
                 android:layout_marginTop="20dp"
 
                 android:hint="Bid Title"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -58,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvDesBidPrice"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="85dp"
                 android:layout_marginTop="20dp"
                 android:hint="Bid Price"
                 android:textSize="20sp"/>
@@ -79,7 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvDesBidMaxPrice"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="45dp"
                 android:layout_marginTop="20dp"
                 android:hint="Bid Max Price"
                 android:textSize="20sp"/>
@@ -126,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tvDesBidEndingDate"
                 android:layout_below="@id/tvDesBidMarketValue"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="20dp"
                 android:layout_toEndOf="@id/ivDesBidProfile"
                 android:hint="Bid Ending Date"
@@ -151,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tvDesBidCategory"
                 android:layout_below="@id/tvDesBidEndingDate"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="90dp"
                 android:layout_marginTop="20dp"
                 android:layout_toEndOf="@id/ivDesBidProfile"
                 android:hint="Category"
@@ -173,7 +174,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/etDesPlaceYourBid"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="40dp"
                 android:layout_marginTop="20dp"
                 android:hint="Your Bid Amount"
                 android:inputType="number"
@@ -184,6 +185,7 @@
             android:id="@+id/btnDesAddAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
             android:text="Bid Fight" />
     </LinearLayout>
 

@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.agilegroupfrontend.BLL.ClosedBidBLL;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,29 +28,16 @@ public class ClosedBidsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_closed_bids);
         closedRecyclerView = findViewById(R.id.closedRecyclerView);
 
-        AuctionSystemAPI auctionSystemAPI = Url.getInstance().create(AuctionSystemAPI.class);
+        ClosedBidBLL closedBidBLL = new ClosedBidBLL();
 
-        Call<List<Bids>> listCall = auctionSystemAPI.getClosedByID(Url.Token,Url.userId);
+        if (closedBidBLL.getClosedBid()){
+            ClosedBidsAdapter closedBidsAdapter = new ClosedBidsAdapter(ClosedBidsActivity.this,Url.bidsList);
+            closedRecyclerView.setAdapter(closedBidsAdapter);
+            closedRecyclerView.setLayoutManager(new LinearLayoutManager(ClosedBidsActivity.this));
+        }else{
+            Toast.makeText(ClosedBidsActivity.this, "Failed", Toast.LENGTH_LONG).show();
 
-        listCall.enqueue(new Callback<List<Bids>>() {
-            @Override
-            public void onResponse(Call<List<Bids>> call, Response<List<Bids>> response) {
-                Toast.makeText(ClosedBidsActivity.this, "Error : "+response.code(), Toast.LENGTH_LONG).show();
+        }
 
-                bidsList = response.body();
-
-                Toast.makeText(ClosedBidsActivity.this, String.valueOf(bidsList.size()), Toast.LENGTH_LONG).show();
-
-                ClosedBidsAdapter closedBidsAdapter = new ClosedBidsAdapter(ClosedBidsActivity.this,bidsList);
-                closedRecyclerView.setAdapter(closedBidsAdapter);
-                closedRecyclerView.setLayoutManager(new LinearLayoutManager(ClosedBidsActivity.this));
-            }
-
-            @Override
-            public void onFailure(Call<List<Bids>> call, Throwable t) {
-                Toast.makeText(ClosedBidsActivity.this, "Error : "+t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        });
     }
 }

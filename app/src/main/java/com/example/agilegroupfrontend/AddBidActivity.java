@@ -61,6 +61,7 @@ public class AddBidActivity extends AppCompatActivity implements DatePickerDialo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_bid);
+        AddBidActivity.this.setTitle("Auction Center");
         imageview = findViewById(R.id.imageview);
 
         btnCreate = findViewById(R.id.btnCreate);

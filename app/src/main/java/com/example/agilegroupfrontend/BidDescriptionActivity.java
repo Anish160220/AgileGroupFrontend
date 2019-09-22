@@ -57,9 +57,9 @@ public class BidDescriptionActivity extends AppCompatActivity {
 
 
             tvDesBidTitle.setText(bundle.getString("bidTitle"));
-            tvDesBidPrice.setText(String.valueOf(bundle.getInt("bidPrice")));
-            tvDesBidMaxPrice.setText(String.valueOf(bundle.getInt("maxPrice")));
-            tvDesBidMarketValue.setText(String.valueOf(bundle.getInt("marketValue")));
+            tvDesBidPrice.setText("Rs." + String.valueOf(bundle.getInt("bidPrice"))+"/-");
+            tvDesBidMaxPrice.setText("Rs." + String.valueOf(bundle.getInt("maxPrice"))+"/-");
+            tvDesBidMarketValue.setText("Rs." + String.valueOf(bundle.getInt("marketValue"))+"/-");
             tvDesBidEndingDate.setText(bundle.getString("endingDate"));
             tvDesBidCategory.setText(bundle.getString("category"));
             String bid_Id= String.valueOf(bundle.getInt("bidId"));

@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.agilegroupfrontend.BLL.YourAuctionSoldOutActivityBLL;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,27 +26,19 @@ public class YourAuctionSoldOutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_auction_sold_out);
+        YourAuctionSoldOutActivity.this.setTitle("Your Sold Auction");
         yourAuctionSoldOutRecyclerView = findViewById(R.id.yourAuctionSoldOutRecyclerView);
-        AuctionSystemAPI auctionSystemAPI = Url.getInstance().create(AuctionSystemAPI.class);
 
-        Call<List<Bids>> listCall = auctionSystemAPI.getSoldByID(Url.Token,Url.userId);
+        YourAuctionSoldOutActivityBLL yourAuctionSoldOutActivityBLL = new YourAuctionSoldOutActivityBLL();
 
-        listCall.enqueue(new Callback<List<Bids>>() {
-            @Override
-            public void onResponse(Call<List<Bids>> call, Response<List<Bids>> response) {
+        if (yourAuctionSoldOutActivityBLL.getOwnSoldBids()){
+            YourAuctionSoldOutAdapter yourAuctionSoldOutAdapter = new YourAuctionSoldOutAdapter(YourAuctionSoldOutActivity.this, Url.bidsList);
+            yourAuctionSoldOutRecyclerView.setAdapter(yourAuctionSoldOutAdapter);
+            yourAuctionSoldOutRecyclerView.setLayoutManager(new LinearLayoutManager(YourAuctionSoldOutActivity.this));
 
-                bidsList = response.body();
-                YourAuctionSoldOutAdapter yourAuctionSoldOutAdapter = new YourAuctionSoldOutAdapter(YourAuctionSoldOutActivity.this, bidsList);
-                yourAuctionSoldOutRecyclerView.setAdapter(yourAuctionSoldOutAdapter);
-                yourAuctionSoldOutRecyclerView.setLayoutManager(new LinearLayoutManager(YourAuctionSoldOutActivity.this));
+        }else{
+            Toast.makeText(YourAuctionSoldOutActivity.this, "Failed", Toast.LENGTH_LONG).show();
 
-            }
-
-            @Override
-            public void onFailure(Call<List<Bids>> call, Throwable t) {
-                Toast.makeText(YourAuctionSoldOutActivity.this, "E"+t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        });
+        }
     }
 }

@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.agilegroupfrontend.BLL.MikeBLL;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,31 +26,18 @@ public class MikeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mike);
+        MikeActivity.this.setTitle("Mike");
         MikerecyclerView = findViewById(R.id.MikerecyclerView);
-        AuctionSystemAPI auctionSystemAPI = Url.getInstance().create(AuctionSystemAPI.class);
 
-        Call<List<Bids>> listCall = auctionSystemAPI.getMikeBids(Url.Token);
-        listCall.enqueue(new Callback<List<Bids>>() {
-            @Override
-            public void onResponse(Call<List<Bids>> call, Response<List<Bids>> response) {
-                if (response.isSuccessful()){
-                    Toast.makeText(MikeActivity.this, "Error : "+response.code(), Toast.LENGTH_LONG).show();
+        MikeBLL mikeBLL = new MikeBLL();
+        if (mikeBLL.getMikeBid()){
+            BidsAdapter bidsAdapter = new BidsAdapter(MikeActivity.this,Url.bidsList);
+            MikerecyclerView.setAdapter(bidsAdapter);
+            MikerecyclerView.setLayoutManager(new LinearLayoutManager(MikeActivity.this));
+        }else{
+            Toast.makeText(MikeActivity.this, "Failed", Toast.LENGTH_LONG).show();
 
-                    bidsList = response.body();
+        }
 
-                    Toast.makeText(MikeActivity.this, String.valueOf(bidsList.size()), Toast.LENGTH_LONG).show();
-
-                    BidsAdapter bidsAdapter = new BidsAdapter(MikeActivity.this,bidsList);
-                    MikerecyclerView.setAdapter(bidsAdapter);
-                    MikerecyclerView.setLayoutManager(new LinearLayoutManager(MikeActivity.this));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Bids>> call, Throwable t) {
-                Toast.makeText(MikeActivity.this, "Error : "+t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        });
     }
 }

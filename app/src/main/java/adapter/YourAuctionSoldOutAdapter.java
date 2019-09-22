@@ -54,8 +54,8 @@ public class YourAuctionSoldOutAdapter extends RecyclerView.Adapter<YourAuctionS
         }
 
         yourAuctionSoldOutViewHolder.tvCYourAuctionSoldOutBidsTitle.setText(bids.getBidTitle());
-        yourAuctionSoldOutViewHolder.tvYourAuctionSoldOutBidsPrice.setText(String.valueOf(bids.getBidAmount()));
-        yourAuctionSoldOutViewHolder.tvYourAuctionSoldOutMarketValue.setText(String.valueOf(bids.getMarketValue()));
+        yourAuctionSoldOutViewHolder.tvYourAuctionSoldOutBidsPrice.setText("Rs."+String.valueOf(bids.getBidAmount())+"/-");
+        yourAuctionSoldOutViewHolder.tvYourAuctionSoldOutMarketValue.setText("Rs."+String.valueOf(bids.getMarketValue())+"/-");
 
 //        yourAuctionOngoingViewHolder.yourAuctionOngoingBidsImgPhoto.setOnClickListener(new View.OnClickListener() {
 //            @Override

@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.agilegroupfrontend.BLL.OtherBLL;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,31 +26,18 @@ public class OtherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_other);
+        OtherActivity.this.setTitle("Others");
         OtherrecyclerView = findViewById(R.id.OtherrecyclerView);
-        AuctionSystemAPI auctionSystemAPI = Url.getInstance().create(AuctionSystemAPI.class);
 
-        Call<List<Bids>> listCall = auctionSystemAPI.getOtherBids(Url.Token);
-        listCall.enqueue(new Callback<List<Bids>>() {
-            @Override
-            public void onResponse(Call<List<Bids>> call, Response<List<Bids>> response) {
-                if (response.isSuccessful()){
-                    Toast.makeText(OtherActivity.this, "Error : "+response.code(), Toast.LENGTH_LONG).show();
+        OtherBLL otherBLL = new OtherBLL();
+        if (otherBLL.getOtherBId()){
+            BidsAdapter bidsAdapter = new BidsAdapter(OtherActivity.this,bidsList);
+            OtherrecyclerView.setAdapter(bidsAdapter);
+            OtherrecyclerView.setLayoutManager(new LinearLayoutManager(OtherActivity.this));
+        }else{
+            Toast.makeText(OtherActivity.this, "Failed" , Toast.LENGTH_LONG).show();
 
-                    bidsList = response.body();
+        }
 
-                    Toast.makeText(OtherActivity.this, String.valueOf(bidsList.size()), Toast.LENGTH_LONG).show();
-
-                    BidsAdapter bidsAdapter = new BidsAdapter(OtherActivity.this,bidsList);
-                    OtherrecyclerView.setAdapter(bidsAdapter);
-                    OtherrecyclerView.setLayoutManager(new LinearLayoutManager(OtherActivity.this));
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Bids>> call, Throwable t) {
-                Toast.makeText(OtherActivity.this, "Error : "+t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        });
     }
 }

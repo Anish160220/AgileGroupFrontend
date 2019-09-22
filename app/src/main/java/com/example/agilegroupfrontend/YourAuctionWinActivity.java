@@ -6,6 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.agilegroupfrontend.BLL.YourAuctionSoldOutActivityBLL;
+import com.example.agilegroupfrontend.BLL.YourAuctionWinBLL;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,30 +23,26 @@ import url.Url;
 public class YourAuctionWinActivity extends AppCompatActivity {
     private RecyclerView yourAuctionWinRecyclerView;
     List<Bids> bidsList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_your_auction_win);
+        YourAuctionWinActivity.this.setTitle("Your Won Items");
         yourAuctionWinRecyclerView = findViewById(R.id.yourAuctionWinRecyclerView);
-        AuctionSystemAPI auctionSystemAPI = Url.getInstance().create(AuctionSystemAPI.class);
 
-        Call<List<Bids>> listCall = auctionSystemAPI.getWinByID(Url.Token,Url.userId);
+        YourAuctionWinBLL yourAuctionWinBLL = new YourAuctionWinBLL();
 
-        listCall.enqueue(new Callback<List<Bids>>() {
-            @Override
-            public void onResponse(Call<List<Bids>> call, Response<List<Bids>> response) {
-                bidsList = response.body();
-                YourAuctionWinAdapter yourAuctionWinAdapter = new YourAuctionWinAdapter(YourAuctionWinActivity.this, bidsList);
-                yourAuctionWinRecyclerView.setAdapter(yourAuctionWinAdapter);
-                yourAuctionWinRecyclerView.setLayoutManager(new LinearLayoutManager(YourAuctionWinActivity.this));
+        if (yourAuctionWinBLL.getWinBid()) {
+            YourAuctionWinAdapter yourAuctionWinAdapter = new YourAuctionWinAdapter(YourAuctionWinActivity.this, Url.bidsList);
+            yourAuctionWinRecyclerView.setAdapter(yourAuctionWinAdapter);
+            yourAuctionWinRecyclerView.setLayoutManager(new LinearLayoutManager(YourAuctionWinActivity.this));
 
-            }
+        } else {
+            Toast.makeText(YourAuctionWinActivity.this, "Failed", Toast.LENGTH_LONG).show();
 
-            @Override
-            public void onFailure(Call<List<Bids>> call, Throwable t) {
-                Toast.makeText(YourAuctionWinActivity.this, "E"+t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+        }
 
-            }
-        });
+
     }
 }

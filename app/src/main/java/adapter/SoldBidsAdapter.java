@@ -52,8 +52,8 @@ public class SoldBidsAdapter extends RecyclerView.Adapter<SoldBidsAdapter.SoldBi
         }
 
         soldBidsViewHolder.tvSoldBidsBidsTitle.setText(bids.getBidTitle());
-        soldBidsViewHolder.tvSoldBidsBidsPrice.setText(String.valueOf(bids.getBidAmount()));
-        soldBidsViewHolder.tvSoldBidsMarketValue.setText(String.valueOf(bids.getMarketValue()));
+        soldBidsViewHolder.tvSoldBidsBidsPrice.setText("Rs."+String.valueOf(bids.getBidAmount())+"/-");
+        soldBidsViewHolder.tvSoldBidsMarketValue.setText("Rs."+String.valueOf(bids.getMarketValue())+"/-");
     }
 
     private void StrictMode() {
