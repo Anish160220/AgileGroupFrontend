@@ -1,5 +1,7 @@
 package auctionsystemapi;
 
+import java.util.List;
+
 import model.Bids;
 import model.ImageResponse;
 import model.LoginSignupResponse;
@@ -8,6 +10,7 @@ import model.Users;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -26,4 +29,7 @@ public interface AuctionSystemAPI {
 
     @POST("api/bid/addbid")
     Call<Response> addBids(@Header("x-access-token") String token, @Body Bids bids);
+
+    @GET("api/bid/bids")
+    Call<List<Bids>> getAllBids(@Header("x-access-token") String token);
 }
