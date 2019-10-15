@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".BidsActivity"></activity>
+        <activity android:name=".BidDescriptionActivity"></activity>
+        <activity android:name=".BidsActivity" />
         <activity android:name=".AddBidActivity" />
         <activity android:name=".UserDashboardActivity" />
         <activity android:name=".MainActivity">
