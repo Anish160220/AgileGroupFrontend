@@ -3,6 +3,7 @@ package auctionsystemapi;
 import java.util.List;
 
 import model.Bids;
+import model.Bids_Fight;
 import model.ImageResponse;
 import model.LoginSignupResponse;
 import model.Response;
@@ -32,4 +33,7 @@ public interface AuctionSystemAPI {
 
     @GET("api/bid/bids")
     Call<List<Bids>> getAllBids(@Header("x-access-token") String token);
+
+    @POST("api/bidfight/addbidfight")
+    Call<Response> addBidsFight(@Header("x-access-token") String token,@Body Bids_Fight bids_fight);
 }
