@@ -181,10 +181,10 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnDesAddAmount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btnDesAddAmount"
-            android:text="Button"/>
+            android:text="Bid Fight" />
     </LinearLayout>
 
 </ScrollView>

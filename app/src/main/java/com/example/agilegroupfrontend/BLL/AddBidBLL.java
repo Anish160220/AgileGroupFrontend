@@ -1,6 +1,7 @@
 package com.example.agilegroupfrontend.BLL;
 
 import auctionsystemapi.AuctionSystemAPI;
+import model.APIResponse;
 import model.Bids;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -34,12 +35,12 @@ public class AddBidBLL {
         Bids bids = new Bids(this.userId,this.bidImage,this.bidTitle, this.startingPrice,this.maxPrice,this.marketValue,this.endingDate,this.category,this.bidCount,this.status);
 
         AuctionSystemAPI auctionSystemAPI = Url.getInstance().create(AuctionSystemAPI.class);
-        Call<model.Response> usersCall = auctionSystemAPI.addBids(Url.Token,bids);
+        Call<APIResponse> usersCall = auctionSystemAPI.addBids(Url.Token,bids);
         try {
 
 
-            Response<model.Response> responseResponse = usersCall.execute();
-            if (responseResponse.body().getSuccess()) {
+            Response<APIResponse> response = usersCall.execute();
+            if (response.body().isSuccess()) {
                 isSuccess = true;
             }
         }catch (Exception e){

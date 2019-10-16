@@ -1,6 +1,5 @@
 package com.example.agilegroupfrontend;
 
-import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -13,17 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.agilegroupfrontend.BLL.BidFightBLL;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-import auctionsystemapi.AuctionSystemAPI;
-import model.Bids_Fight;
-import model.Response;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import url.Url;
 
 public class BidDescriptionActivity extends AppCompatActivity {
@@ -86,39 +80,15 @@ public class BidDescriptionActivity extends AppCompatActivity {
     private void AddAmount() {
         if(validate()){
             int bidAmount = Integer.parseInt(etDesPlaceYourBid.getText().toString());
-
-            Bids_Fight bids_fight = new Bids_Fight(bidId, Url.userId,bidAmount);
-
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Url.BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+            BidFightBLL bidFightBLL = new BidFightBLL(bidId, Url.userId, bidAmount);
 
 
-            AuctionSystemAPI auctionSystemAPI = retrofit.create(AuctionSystemAPI.class);
+           if (bidFightBLL.checkBidFight()){
+               Toast.makeText(BidDescriptionActivity.this,"Bid amount added successful",Toast.LENGTH_SHORT).show();
+           }else {
+               Toast.makeText(BidDescriptionActivity.this,Url.message,Toast.LENGTH_SHORT).show();
 
-            Call<Response> bidsCall = auctionSystemAPI.addBidsFight(Url.Token,bids_fight);
-
-            bidsCall.enqueue(new Callback<Response>() {
-                @Override
-                public void onResponse(Call<model.Response> call, retrofit2.Response<Response> response) {
-                    if (!response.isSuccessful()){
-
-                        Toast.makeText(BidDescriptionActivity.this,"Code" + response.code(),Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    Toast.makeText(BidDescriptionActivity.this, "Successfully Added your bid",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(BidDescriptionActivity.this,BidsActivity.class);
-                    startActivity(intent);
-                }
-
-                @Override
-                public void onFailure(Call<model.Response> call, Throwable t) {
-                    Toast.makeText(BidDescriptionActivity.this,"Error " + t.getLocalizedMessage(),Toast.LENGTH_LONG).show();
-
-                }
-            });
-
+           }
 
 
 

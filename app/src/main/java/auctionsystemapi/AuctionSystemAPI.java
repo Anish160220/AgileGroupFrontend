@@ -2,14 +2,15 @@ package auctionsystemapi;
 
 import java.util.List;
 
+import model.APIResponse;
 import model.Bids;
 import model.Bids_Fight;
 import model.ImageResponse;
 import model.LoginSignupResponse;
-import model.Response;
 import model.Users;
 import okhttp3.MultipartBody;
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -29,11 +30,11 @@ public interface AuctionSystemAPI {
     Call<ImageResponse> uploadImage(@Header("x-access-token") String token, @Part MultipartBody.Part img);
 
     @POST("api/bid/addbid")
-    Call<Response> addBids(@Header("x-access-token") String token, @Body Bids bids);
+    Call<APIResponse> addBids(@Header("x-access-token") String token, @Body Bids bids);
 
     @GET("api/bid/bids")
     Call<List<Bids>> getAllBids(@Header("x-access-token") String token);
 
     @POST("api/bidfight/addbidfight")
-    Call<Response> addBidsFight(@Header("x-access-token") String token,@Body Bids_Fight bids_fight);
+    Call<APIResponse> addBidsFight(@Header("x-access-token") String token, @Body Bids_Fight bids_fight);
 }
