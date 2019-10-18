@@ -72,5 +72,12 @@ public class UserDashboardActivity extends AppCompatActivity {
             }
         });
 
+        cvUserSoldOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserDashboardActivity.this, SoldBidsActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

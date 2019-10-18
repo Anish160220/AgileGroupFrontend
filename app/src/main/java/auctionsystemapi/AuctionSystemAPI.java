@@ -37,4 +37,7 @@ public interface AuctionSystemAPI {
 
     @POST("api/bidfight/addbidfight")
     Call<APIResponse> addBidsFight(@Header("x-access-token") String token, @Body Bids_Fight bids_fight);
+
+    @GET("api/bid/soldbids")
+    Call<List<Bids>> getAllSoldBids(@Header("x-access-token") String token);
 }
