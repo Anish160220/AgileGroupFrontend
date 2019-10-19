@@ -17,6 +17,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public interface AuctionSystemAPI {
     @POST("api/account/register")
@@ -40,4 +41,8 @@ public interface AuctionSystemAPI {
 
     @GET("api/bid/soldbids")
     Call<List<Bids>> getAllSoldBids(@Header("x-access-token") String token);
+
+    //get Auction Ongoing list on the basis of USer_Id
+    @GET("api/bid/{id}/soldbid")
+    Call<List<Bids>>  getSoldByID(@Header("x-access-token") String token,@Path("id") int id);
 }
