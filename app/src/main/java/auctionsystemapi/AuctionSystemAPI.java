@@ -45,4 +45,9 @@ public interface AuctionSystemAPI {
     //get Auction Ongoing list on the basis of USer_Id
     @GET("api/bid/{id}/soldbid")
     Call<List<Bids>>  getSoldByID(@Header("x-access-token") String token,@Path("id") int id);
+
+    //get Auction Ongoing list on the basis of USer_Id
+    @GET("api/bid/{id}/winbid")
+    Call<List<Bids>>  getWinByID(@Header("x-access-token") String token,@Path("id") int id);
+
 }

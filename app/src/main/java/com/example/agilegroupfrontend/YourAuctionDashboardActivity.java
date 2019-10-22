@@ -22,5 +22,13 @@ public class YourAuctionDashboardActivity extends AppCompatActivity {
             }
         });
 
+        cvYourAuctionWinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(YourAuctionDashboardActivity.this, YourAuctionWinActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
