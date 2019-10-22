@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PedalActivity"></activity>
+        <activity android:name=".ClosedBidDescriptionActivity"></activity>
+        <activity android:name=".ClosedBidsActivity" />
+        <activity android:name=".PedalActivity" />
         <activity android:name=".MikeActivity" />
         <activity android:name=".GuitarActivity" />
         <activity android:name=".OtherActivity" />
