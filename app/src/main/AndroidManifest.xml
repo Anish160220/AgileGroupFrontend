@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CategoryDashboardActivity"></activity>
+        <activity android:name=".OtherActivity"></activity>
+        <activity android:name=".CategoryDashboardActivity" />
         <activity android:name=".YourAuctionWinActivity" />
         <activity android:name=".YourAuctionSoldOutActivity" />
         <activity android:name=".YourAuctionDashboardActivity" />

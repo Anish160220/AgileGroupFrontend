@@ -50,4 +50,17 @@ public interface AuctionSystemAPI {
     @GET("api/bid/{id}/winbid")
     Call<List<Bids>>  getWinByID(@Header("x-access-token") String token,@Path("id") int id);
 
+
+    @GET("api/bid/guitarbids")
+    Call<List<Bids>> getGuitarBids(@Header("x-access-token") String token);
+
+    @GET("api/bid/mikebids")
+    Call<List<Bids>> getMikeBids(@Header("x-access-token") String token);
+
+    @GET("api/bid/pedalbids")
+    Call<List<Bids>> getPedalBids(@Header("x-access-token") String token);
+
+    @GET("api/bid/otherbids")
+    Call<List<Bids>> getOtherBids(@Header("x-access-token") String token);
+
 }
