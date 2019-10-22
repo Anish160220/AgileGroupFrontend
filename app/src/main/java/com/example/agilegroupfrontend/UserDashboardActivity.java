@@ -87,5 +87,13 @@ public class UserDashboardActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        cvUserCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserDashboardActivity.this,CategoryDashboardActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
