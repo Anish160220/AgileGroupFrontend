@@ -41,12 +41,12 @@ public class CategoryDashboardActivity extends AppCompatActivity {
             }
         });
 
-//        cvPedal.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(CategoryDashboardActivity.this,PedalActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        cvPedal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CategoryDashboardActivity.this,PedalActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
